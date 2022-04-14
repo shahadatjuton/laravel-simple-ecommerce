@@ -19,6 +19,9 @@
 
     <!-- aiz core css -->
     <link rel="stylesheet" href="{{asset('assets/backend/css/aiz-core.css')}}">
+                    {{--    Toastr--}}
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 
     <script>
         var AIZ = AIZ || {};
@@ -42,6 +45,10 @@
 
 <script src="{{asset('assets/backend/js/vendors.js')}}" ></script>
 <script src="{{asset('assets/backend/js/aiz-core.js')}}" ></script>
+
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+                {{--Toastr--}}
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
 <script>
     @if($errors->any())
