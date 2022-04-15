@@ -3,7 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\CategoryType;
+use App\Models\Product;
+use App\Models\SubCategory;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -14,7 +22,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('admin.product.productList',compact('products'));
     }
 
     /**
@@ -24,7 +33,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $categoryTypes = CategoryType::all();
+        $subCategories = SubCategory::all();
+        return view('admin.product.createProduct',compact('categoryTypes','categories','subCategories'));
     }
 
     /**
@@ -35,7 +47,41 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request,[
+            'subcategory'=>'required',
+            'name'=>'required',
+            'quantity'=>'required',
+            'price'=>'required',
+            'brand'=>'required',
+            'description'=>'required',
+//            'image'=>'required',
+        ]);
+
+        $image = $request->file('product_image');
+        $slug = Str::slug($request->name);
+        if (isset($image)){
+            $current_date = Carbon::now()->toDateString();
+            $image_name = $slug.'-'.$current_date.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+//            directory check and create
+            if (!Storage::disk('public')->exists('product')){
+                Storage::disk('public')->makeDirectory('product');
+            }
+//            image resize
+            $product_image = Image::make($image)->resize(420,380)->save($image->getClientOriginalExtension());
+            Storage::disk('public')->put('product/'.$image_name,$product_image);
+        }
+        $product = new Product();
+        $product->subcategory_id = $request->subcategory;
+        $product->product_name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->price = $request->price;
+        $product->brand = $request->brand;
+        $product->description = $request->description;
+//        $product->product_image = $image_name;
+        $product->save();
+        Toastr::success('Product Created Successfully','Success!');
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -57,7 +103,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        $categoryTypes = CategoryType::all();
+        $subCategories = SubCategory::all();
+        return view('admin.product.editProduct',compact('product','categories','categoryTypes','subCategories'));
     }
 
     /**
@@ -69,7 +119,41 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request,[
+            'subcategory'=>'required',
+            'name'=>'required',
+            'quantity'=>'required',
+            'price'=>'required',
+            'brand'=>'required',
+            'description'=>'required',
+//            'image'=>'required',
+        ]);
+
+        $image = $request->file('product_image');
+        $slug = Str::slug($request->name);
+        if (isset($image)){
+            $current_date = Carbon::now()->toDateString();
+            $image_name = $slug.'-'.$current_date.'-'.uniqid().'.'.$image->getClientOriginalExtension();
+//            directory check and create
+            if (!Storage::disk('public')->exists('product')){
+                Storage::disk('public')->makeDirectory('product');
+            }
+//            image resize
+            $product_image = Image::make($image)->resize(420,380)->save($image->getClientOriginalExtension());
+            Storage::disk('public')->put('product/'.$image_name,$product_image);
+        }
+        $product = Product::findOrFail($id);
+        $product->subcategory_id = $request->subcategory;
+        $product->product_name = $request->name;
+        $product->quantity = $request->quantity;
+        $product->price = $request->price;
+        $product->brand = $request->brand;
+        $product->description = $request->description;
+//        $product->product_image = $image_name;
+        $product->save();
+        Toastr::success('Product Created Successfully','Success!');
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -80,6 +164,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        Toastr::success('The Product  is deleted successfully','success');
+        return  redirect()->back();
     }
 }

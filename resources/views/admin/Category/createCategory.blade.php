@@ -19,12 +19,22 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{route('admin.category-type.store')}}" method="post">
+                                    <form action="{{route('admin.category.store')}}" method="post">
                                         @csrf
+
                                         <div class="mb-3">
-                                            <label  class="form-label">Category Type</label>
-                                            <input type="text" class="form-control"  name="category_type">
+                                            <label  class="form-label"> Category Type </label>
+                                            <select  class="form-select" name="category_type">
+                                                @foreach($categoryTypes as $categoryType)
+                                                    <option value="{{$categoryType->id}}">{{$categoryType->category_type}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
+                                        <div class="mb-3">
+                                            <label  class="form-label"> Category Name </label>
+                                            <input type="text" class="form-control"  name="category">
+                                        </div>
+
                                         <button type="submit" class="btn btn-primary">Create</button>
                                     </form>
 

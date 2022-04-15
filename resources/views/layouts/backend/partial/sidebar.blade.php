@@ -23,18 +23,29 @@
                     </a>
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="{{route('admin.category-type.index')}}" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Category Type</span>
+                            <a href="{{route('admin.category.index')}}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Categories</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
-                            <a href="javascript:void(0);" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Sub Category</span>
+                            <a href="{{route('admin.category-type.index')}}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Category Types</span>
+                            </a>
+                        </li>
+                        <li class="aiz-side-nav-item">
+                            <a href="{{route('admin.sub-category.index')}}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Sub Categories</span>
                             </a>
                         </li>
 
                     </ul>
                 </li>
+                    <li class="aiz-side-nav-item">
+                        <a href="{{route('admin.product.index')}}" class="aiz-side-nav-link">
+                            <i class="las la-home aiz-side-nav-icon"></i>
+                            <span class="aiz-side-nav-text">Products</span>
+                        </a>
+                    </li>
                 @endif
                     @if(Request::is('customer*'))
                         <li class="aiz-side-nav-item">

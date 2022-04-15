@@ -10,21 +10,30 @@
                         <div class="col-lg-10 offset-1">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0 h6">Update Category Type</h5>
+                                    <h5 class="mb-0 h6">Update Sub-Category </h5>
                                     <div class="float-right">
-                                        <a href="{{route('admin.category-type.index')}}" class="btn btn-primary">
+                                        <a href="{{route('admin.sub-category.index')}}" class="btn btn-primary">
                                             <i class="las la-list"></i>
-                                            <span>Category Type List</span>
+                                            <span>Sub-Category List</span>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{route('admin.category-type.update',$categoryType->id)}}" method="post">
+                                    <form action="{{route('admin.sub-category.update',$subCategory->id)}}" method="post">
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3">
-                                            <label  class="form-label">Category Type</label>
-                                            <input type="text" class="form-control"  name="category_type" value="{{$categoryType->category_type}}">
+                                            <label  class="form-label"> Category Type </label>
+                                            <select  class="form-select" name="category">
+                                                <option value="{{$subCategory->category->id}}" selected>{{$subCategory->category->category}}</option>
+                                            @foreach($categories as $category)
+                                                    <option value="{{$category->id}}">{{$category->category}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label  class="form-label"> Sub-Category Name </label>
+                                            <input type="text" class="form-control"  name="subcategory" value="{{$subCategory->subcategory}}">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Update</button>
                                     </form>

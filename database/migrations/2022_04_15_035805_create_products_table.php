@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('brand');
             $table->float('price');
             $table->float('quantity');
-            $table->string('product_image');
+            $table->string('product_image')->default('default.png');
             $table->text('description');
             $table->timestamps();
         });

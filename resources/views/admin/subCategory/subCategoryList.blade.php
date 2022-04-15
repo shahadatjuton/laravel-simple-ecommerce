@@ -15,11 +15,11 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0 h6">Category Type List</h5>
+                                    <h5 class="mb-0 h6">Sub-Category List</h5>
                                     <div class="float-right">
-                                        <a href="{{route('admin.category-type.create')}}" class="btn btn-primary">
+                                        <a href="{{route('admin.sub-category.create')}}" class="btn btn-primary">
                                             <i class="las la-plus"></i>
-                                            <span>Create A Category Type</span>
+                                            <span>Create A Sub-Category </span>
                                         </a>
                                     </div>
                                 </div>
@@ -30,24 +30,28 @@
                                         <tr>
                                             <th scope="col">SL</th>
                                             <th scope="col">Category Type</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Sub-Category</th>
                                             <th scope="col">Created At</th>
                                             <th scope="col">Updated At</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($categoryTypes as $key=>$categoryType)
+                                        @forelse($subCategories as $key=>$subCategory)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$categoryType->category_type}}</td>
-                                            <td>{{$categoryType->created_at}}</td>
-                                            <td>{{$categoryType->updated_at}}</td>
+                                            <td>{{$subCategory->category->categoryType->category_type}}</td>
+                                            <td>{{$subCategory->category->category}}</td>
+                                            <td>{{$subCategory->subcategory}}</td>
+                                            <td>{{$subCategory->created_at}}</td>
+                                            <td>{{$subCategory->updated_at}}</td>
                                             <td>
-                                                <a href="{{route('admin.category-type.edit',$categoryType->id)}}" class="btn btn-primary"><i class="las la-edit"></i></a>
-                                                <button class="btn btn-danger" onclick="deleteCategoryType({{$categoryType->id}})">
+                                                <a href="{{route('admin.sub-category.edit',$subCategory->id)}}" class="btn btn-primary"><i class="las la-edit"></i></a>
+                                                <button class="btn btn-danger" onclick="deleteSubCategory({{$subCategory->id}})">
                                                     <i class="las la-trash"></i>
                                                 </button>
-                                                <form id="category-type-delete-{{$categoryType->id}}" action="{{route('admin.category-type.destroy',$categoryType->id)}}" method="post" style="display: none">
+                                                <form id="sub-category-delete-{{$subCategory->id}}" action="{{route('admin.sub-category.destroy',$subCategory->id)}}" method="post" style="display: none">
                                                     @csrf
                                                     @method('delete')
 
@@ -81,7 +85,7 @@
 @push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        function deleteCategoryType(id){
+        function deleteSubCategory(id){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success',
@@ -101,7 +105,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.preventDefault();
-                    document.getElementById('category-type-delete-'+id).submit();
+                    document.getElementById('sub-category-delete-'+id).submit();
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel

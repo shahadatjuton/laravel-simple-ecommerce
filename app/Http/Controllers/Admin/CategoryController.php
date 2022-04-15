@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\CategoryType;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -14,7 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.category.categoryList',compact('categories'));
     }
 
     /**
@@ -24,7 +29,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categoryTypes = CategoryType::all();
+        return view('admin.category.createCategory',compact('categoryTypes'));
+
     }
 
     /**
@@ -35,7 +42,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request,[
+            'category'=>'required|unique:categories'
+        ]);
+        $category = new Category();
+        $category->category_type_id = $request->category_type;
+        $category->category = $request->category;
+        $category->slug = Str::slug($request->category);
+        $category->save();
+        Toastr::success('Category is Created successfully', 'Success!!');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -57,9 +74,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $categoryTypes = CategoryType::all();
+        return view('admin.category.editCategory',compact('category','categoryTypes'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -69,7 +87,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'category'=>'required'
+        ]);
+        $category = Category::findOrFail($id);
+
+        $category->category_type_id = $request->category_type;
+        $category->category = $request->category;
+        $category->slug = Str::slug($request->category);
+        $category->save();
+        Toastr::success('Category is Updated successfully', 'Success!!');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -80,6 +108,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+        Toastr::success('The category  is deleted successfully','success');
+        return  redirect()->back();
     }
 }

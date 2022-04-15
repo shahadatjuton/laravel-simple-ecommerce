@@ -19,12 +19,21 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{route('admin.category-type.update',$categoryType->id)}}" method="post">
+                                    <form action="{{route('admin.category.update',$category->id)}}" method="post">
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3">
-                                            <label  class="form-label">Category Type</label>
-                                            <input type="text" class="form-control"  name="category_type" value="{{$categoryType->category_type}}">
+                                            <label  class="form-label"> Category Type </label>
+                                            <select  class="form-select" name="category_type">
+                                                <option value="{{$category->categoryType->id}}" selected>{{$category->categoryType->category_type}}</option>
+                                            @foreach($categoryTypes as $categoryType)
+                                                    <option value="{{$categoryType->id}}">{{$categoryType->category_type}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label  class="form-label"> Category Name </label>
+                                            <input type="text" class="form-control"  name="category" value="{{$category->category}}">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Update</button>
                                     </form>

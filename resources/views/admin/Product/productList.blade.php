@@ -15,11 +15,11 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="mb-0 h6">Category Type List</h5>
+                                    <h5 class="mb-0 h6">Product List</h5>
                                     <div class="float-right">
-                                        <a href="{{route('admin.category-type.create')}}" class="btn btn-primary">
+                                        <a href="{{route('admin.product.create')}}" class="btn btn-primary">
                                             <i class="las la-plus"></i>
-                                            <span>Create A Category Type</span>
+                                            <span>Create A New Product </span>
                                         </a>
                                     </div>
                                 </div>
@@ -29,25 +29,33 @@
                                         <thead>
                                         <tr>
                                             <th scope="col">SL</th>
-                                            <th scope="col">Category Type</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
                                             <th scope="col">Created At</th>
                                             <th scope="col">Updated At</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($categoryTypes as $key=>$categoryType)
+                                        @forelse($products as $key=>$product)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
-                                            <td>{{$categoryType->category_type}}</td>
-                                            <td>{{$categoryType->created_at}}</td>
-                                            <td>{{$categoryType->updated_at}}</td>
                                             <td>
-                                                <a href="{{route('admin.category-type.edit',$categoryType->id)}}" class="btn btn-primary"><i class="las la-edit"></i></a>
-                                                <button class="btn btn-danger" onclick="deleteCategoryType({{$categoryType->id}})">
+                                                <img src="{{asset('storage/product/'.$product->product_image)}}">
+                                            </td>
+                                            <td>{{$product->product_name}}</td>
+                                            <td>{{$product->quantity}}</td>
+                                            <td>{{$product->price}}</td>
+                                            <td>{{$product->created_at}}</td>
+                                            <td>{{$product->updated_at}}</td>
+                                            <td>
+                                                <a href="{{route('admin.product.edit',$product->id)}}" class="btn btn-primary"><i class="las la-edit"></i></a>
+                                                <button class="btn btn-danger" onclick="deleteProduct({{$product->id}})">
                                                     <i class="las la-trash"></i>
                                                 </button>
-                                                <form id="category-type-delete-{{$categoryType->id}}" action="{{route('admin.category-type.destroy',$categoryType->id)}}" method="post" style="display: none">
+                                                <form id="product-delete-{{$product->id}}" action="{{route('admin.product.destroy',$product->id)}}" method="post" style="display: none">
                                                     @csrf
                                                     @method('delete')
 
@@ -81,7 +89,7 @@
 @push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        function deleteCategoryType(id){
+        function deleteProduct(id){
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
                     confirmButton: 'btn btn-success',
@@ -101,7 +109,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     event.preventDefault();
-                    document.getElementById('category-type-delete-'+id).submit();
+                    document.getElementById('product-delete-'+id).submit();
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
