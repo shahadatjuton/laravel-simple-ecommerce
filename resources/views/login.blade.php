@@ -5,6 +5,24 @@
 
     <div class="row mt-4">
         <div class="col-sm-8 offset-2">
+            <div class="row credentials">
+               <div class="col-md-6">
+                   <h4>Credential of Admin</h4>
+                   <ul >
+                       <li>email: admin@gmail.com</li>
+                       <li>password: admin123</li>
+                   </ul>
+               </div>
+                <div class="col-md-6">
+                    <h4>Credential of Customer</h4>
+                    <ul class="float-right">
+                        <li>email: customer@gmail.com</li>
+                        <li>password: customer123</li>
+                    </ul>
+                </div>
+                <hr>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-center">Login Form</h2>
