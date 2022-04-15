@@ -64,8 +64,19 @@
                             <span>My Account</span>
                         </a>
                         <a href="{{route('logout')}}" class="dropdown-item">
-                            <i class="las la-sign-out-alt"></i>
-                            <span>Logout</span>
+
+                            <span>
+                             <a class="dropdown-item " href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <a class="nav-link active" aria-current="page" href="{{route('logout')}}">Log Out</a>
+                                </form>
+                            </span>
                         </a>
                     </div>
                 </div>

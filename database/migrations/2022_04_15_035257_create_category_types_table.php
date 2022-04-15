@@ -15,6 +15,8 @@ class CreateCategoryTypesTable extends Migration
     {
         Schema::create('category_types', function (Blueprint $table) {
             $table->id();
+            $table->string('category_type');
+            $table->string('slug');
             $table->timestamps();
         });
     }

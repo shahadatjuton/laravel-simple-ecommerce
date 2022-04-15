@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\CategoryType;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryTypeController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CategoryTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\CategoryType  $categoryType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(CategoryType $categoryType)
+    public function show($id)
     {
         //
     }
@@ -52,10 +52,10 @@ class CategoryTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\CategoryType  $categoryType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(CategoryType $categoryType)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +64,10 @@ class CategoryTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CategoryType  $categoryType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CategoryType $categoryType)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +75,10 @@ class CategoryTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\CategoryType  $categoryType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CategoryType $categoryType)
+    public function destroy($id)
     {
         //
     }

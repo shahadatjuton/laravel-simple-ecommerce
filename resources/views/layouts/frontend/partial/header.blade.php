@@ -19,33 +19,12 @@
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li class="nav-item dropdown">>
+                            <li class="nav-item dropdown">
 
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">  First level 3  </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"> Second level 1 </a></li>
-                            <li><a class="dropdown-item" href="#"> Second level 2 &raquo </a>
-                                <ul class="submenu dropdown-menu">
-                                    <li><a class="dropdown-item" href=""> Third level 1</a></li>
-                                    <li><a class="dropdown-item" href=""> Third level 2</a></li>
-                                    <li><a class="dropdown-item" href=""> Third level 3 &raquo </a>
-                                        <ul class="submenu dropdown-menu">
-                                            <li><a class="dropdown-item" href=""> Fourth level 1</a></li>
-                                            <li><a class="dropdown-item" href=""> Fourth level 2</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href=""> Second level  4</a></li>
-                                    <li><a class="dropdown-item" href=""> Second level  5</a></li>
-                                </ul>
-                            </li>
-                            <li><a class="dropdown-item" href="#"> Dropdown item 3 </a></li>
-                            <li><a class="dropdown-item" href="#"> Dropdown item 4 </a>
-                        </ul>
-                    </li>
+
                     @guest()
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="{{route('register')}}">Register</a>

@@ -18,25 +18,21 @@
                 <li class="aiz-side-nav-item">
                     <a href="javascript:void(0);" class="aiz-side-nav-link">
                         <i class="las la-tachometer-alt aiz-side-nav-icon"></i>
-                        <span class="aiz-side-nav-text">Forms Elements</span>
+                        <span class="aiz-side-nav-text">Category</span>
                         <span class="aiz-side-nav-arrow"></span>
                     </a>
                     <ul class="aiz-side-nav-list level-2">
                         <li class="aiz-side-nav-item">
-                            <a href="forms-basic.html" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Form Basic</span>
+                            <a href="{{route('admin.category-type.index')}}" class="aiz-side-nav-link">
+                                <span class="aiz-side-nav-text">Category Type</span>
                             </a>
                         </li>
                         <li class="aiz-side-nav-item">
                             <a href="javascript:void(0);" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Dashboard</span>
+                                <span class="aiz-side-nav-text">Sub Category</span>
                             </a>
                         </li>
-                        <li class="aiz-side-nav-item">
-                            <a href="javascript:void(0);" class="aiz-side-nav-link">
-                                <span class="aiz-side-nav-text">Dashboard</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
                 @endif
