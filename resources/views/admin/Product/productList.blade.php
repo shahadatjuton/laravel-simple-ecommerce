@@ -30,6 +30,7 @@
                                         <tr>
                                             <th scope="col">SL</th>
                                             <th scope="col">Image</th>
+                                            <th scope="col">Category Type</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Sub-Category</th>
                                             <th scope="col">Product</th>
@@ -47,6 +48,7 @@
                                             <td>
                                                 <img src="{{asset('storage/product/'.$product->product_image)}}" height="80" width="60">
                                             </td>
+                                            <td>{{$product->subcategory->category->categoryType->category_type}}</td>
                                             <td>{{$product->subcategory->category->category}}</td>
                                             <td>{{$product->subcategory->subcategory}}</td>
                                             <td>{{$product->product_name}}</td>
