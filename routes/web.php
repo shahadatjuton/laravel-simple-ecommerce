@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,11 +34,7 @@ Route::post('logout', [AuthenticationController::class,'logout'])->name('logout'
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //=========================Admin Route==========================================
-//Route::group(['as' => 'admin.' , 'prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth', 'admin']], function (){
-//    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-////    Route::resource('/category',CategoryController::class);
-//    Route::get('category',[CategoryController::class,'index'])->name('category.list');
-//});
+
 Route::group(['as' => 'admin.' , 'prefix'=>'admin', 'middleware'=>['auth', 'admin']], function (){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/category-type',CategoryTypeController::class);
@@ -50,3 +47,9 @@ Route::group(['as' => 'admin.' , 'prefix'=>'admin', 'middleware'=>['auth', 'admi
 Route::group(['as' => 'customer.' , 'prefix'=>'customer', 'namespace'=>'Customer', 'middleware'=>['auth', 'customer']], function (){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+
+//======================Paypal Payment=================
+Route::post('charge', [PaymentController::class,'charge']);
+Route::get('success', [PaymentController::class,'success']);
+Route::get('error', [PaymentController::class,'error']);
