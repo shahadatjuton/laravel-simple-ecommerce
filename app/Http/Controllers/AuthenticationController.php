@@ -28,7 +28,6 @@ class AuthenticationController extends Controller
             'password'=>'required|min:6|max:20',
         ]);
         $user = new User();
-
         $image = $request->file('image');
         $slug = Str::slug($request->name);
         if (isset($image)){
@@ -38,7 +37,7 @@ class AuthenticationController extends Controller
             if (!Storage::disk('public')->exists('profile')){
                 Storage::disk('public')->makeDirectory('profile');
             }
-//            image resize
+//            image resize and store
             $image = Image::make($image)->resize(84,84)->save($image->getClientOriginalExtension());
 //            Image save
             Storage::disk('public')->put('profile/'.$image_name,$image);

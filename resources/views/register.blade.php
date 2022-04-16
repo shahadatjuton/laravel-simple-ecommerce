@@ -33,7 +33,6 @@
                             <label  class="form-label">Image</label>
                             <input type="file" class="form-control" name="image">
                         </div>
-
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>

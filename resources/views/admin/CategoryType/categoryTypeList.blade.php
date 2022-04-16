@@ -40,8 +40,8 @@
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
                                             <td>{{$categoryType->category_type}}</td>
-                                            <td>{{$categoryType->created_at}}</td>
-                                            <td>{{$categoryType->updated_at}}</td>
+                                            <td>{{$categoryType->created_at->diffForHumans()}}</td>
+                                            <td>{{$categoryType->updated_at->diffForHumans()}}</td>
                                             <td>
                                                 <a href="{{route('admin.category-type.edit',$categoryType->id)}}" class="btn btn-primary"><i class="las la-edit"></i></a>
                                                 <button class="btn btn-danger" onclick="deleteCategoryType({{$categoryType->id}})">

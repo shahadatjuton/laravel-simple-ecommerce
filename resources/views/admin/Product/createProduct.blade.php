@@ -19,7 +19,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form class="row" action="{{route('admin.product.store')}}" method="post">
+                                    <form class="row" action="{{route('admin.product.store')}}" method="post" enctype="multipart/form-data">
                                         @csrf
 
                                         <div class=" col-md-4 mb-3">
@@ -67,8 +67,8 @@
                                             <textarea class="form-control"  rows="3" name="description"></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label  class="form-label">Image</label>
-                                            <input type="file" class="form-control" name="image">
+                                            <label  class="form-label">Prduct Image</label>
+                                            <input type="file" class="form-control" name="product_image">
                                         </div>
                                         <div class="col-12 mt-4">
                                             <button type="submit" class="btn btn-primary">Create</button>

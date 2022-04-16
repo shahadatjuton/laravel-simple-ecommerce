@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -47,7 +48,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'subcategory'=>'required',
             'name'=>'required',
@@ -55,7 +55,7 @@ class ProductController extends Controller
             'price'=>'required',
             'brand'=>'required',
             'description'=>'required',
-//            'image'=>'required',
+            'product_image'=>'required|image|mimes:jpeg,jpg,png,bmp,gif,svg',
         ]);
 
         $image = $request->file('product_image');
@@ -67,7 +67,7 @@ class ProductController extends Controller
             if (!Storage::disk('public')->exists('product')){
                 Storage::disk('public')->makeDirectory('product');
             }
-//            image resize
+//            image resize and store
             $product_image = Image::make($image)->resize(420,380)->save($image->getClientOriginalExtension());
             Storage::disk('public')->put('product/'.$image_name,$product_image);
         }
@@ -78,7 +78,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand = $request->brand;
         $product->description = $request->description;
-//        $product->product_image = $image_name;
+        $product->product_image = $image_name;
         $product->save();
         Toastr::success('Product Created Successfully','Success!');
         return redirect()->route('admin.product.index');
@@ -127,9 +127,9 @@ class ProductController extends Controller
             'price'=>'required',
             'brand'=>'required',
             'description'=>'required',
-//            'image'=>'required',
+            'product_image'=>'required|image|mimes:jpeg,jpg,png,bmp,gif,svg',
         ]);
-
+        $product = Product::findOrFail($id);
         $image = $request->file('product_image');
         $slug = Str::slug($request->name);
         if (isset($image)){
@@ -139,20 +139,23 @@ class ProductController extends Controller
             if (!Storage::disk('public')->exists('product')){
                 Storage::disk('public')->makeDirectory('product');
             }
-//            image resize
+            //            Existing image delete
+            if (Storage::disk('public')->exists('product/'.$product->product_image)){
+                Storage::disk('public')->delete('product/'.$product->product_image);
+            }
+//            image resize and store
             $product_image = Image::make($image)->resize(420,380)->save($image->getClientOriginalExtension());
             Storage::disk('public')->put('product/'.$image_name,$product_image);
         }
-        $product = Product::findOrFail($id);
         $product->subcategory_id = $request->subcategory;
         $product->product_name = $request->name;
         $product->quantity = $request->quantity;
         $product->price = $request->price;
         $product->brand = $request->brand;
         $product->description = $request->description;
-//        $product->product_image = $image_name;
+        $product->product_image = $image_name;
         $product->save();
-        Toastr::success('Product Created Successfully','Success!');
+        Toastr::success('Product Updated Successfully','Success!');
         return redirect()->route('admin.product.index');
     }
 

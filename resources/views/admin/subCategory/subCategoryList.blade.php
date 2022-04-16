@@ -44,8 +44,8 @@
                                             <td>{{$subCategory->category->categoryType->category_type}}</td>
                                             <td>{{$subCategory->category->category}}</td>
                                             <td>{{$subCategory->subcategory}}</td>
-                                            <td>{{$subCategory->created_at}}</td>
-                                            <td>{{$subCategory->updated_at}}</td>
+                                            <td>{{$subCategory->created_at->diffForHumans()}}</td>
+                                            <td>{{$subCategory->updated_at->diffForHumans()}}</td>
                                             <td>
                                                 <a href="{{route('admin.sub-category.edit',$subCategory->id)}}" class="btn btn-primary"><i class="las la-edit"></i></a>
                                                 <button class="btn btn-danger" onclick="deleteSubCategory({{$subCategory->id}})">

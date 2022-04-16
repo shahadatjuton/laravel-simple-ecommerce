@@ -19,7 +19,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form class="row" action="{{route('admin.product.update',$product->id)}}" method="post">
+                                    <form class="row" action="{{route('admin.product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <div class=" col-md-4 mb-3">
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <label  class="form-label">Image</label>
-                                            <input type="file" class="form-control" name="image">
+                                            <input type="file" class="form-control" name="product_image">
                                         </div>
                                         <div class="mt-4 ml-3">
                                             <button type="submit" class="btn btn-primary">Update</button>

@@ -17,7 +17,6 @@
 
                 <li class="aiz-side-nav-item">
                     <a href="javascript:void(0);" class="aiz-side-nav-link">
-                        <i class="las la-tachometer-alt aiz-side-nav-icon"></i>
                         <span class="aiz-side-nav-text">Category</span>
                         <span class="aiz-side-nav-arrow"></span>
                     </a>
@@ -42,7 +41,6 @@
                 </li>
                     <li class="aiz-side-nav-item">
                         <a href="{{route('admin.product.index')}}" class="aiz-side-nav-link">
-                            <i class="las la-home aiz-side-nav-icon"></i>
                             <span class="aiz-side-nav-text">Products</span>
                         </a>
                     </li>

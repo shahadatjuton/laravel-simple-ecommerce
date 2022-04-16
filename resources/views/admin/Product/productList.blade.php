@@ -43,13 +43,13 @@
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
                                             <td>
-                                                <img src="{{asset('storage/product/'.$product->product_image)}}">
+                                                <img src="{{asset('storage/product/'.$product->product_image)}}" height="80" width="60">
                                             </td>
                                             <td>{{$product->product_name}}</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$product->price}}</td>
-                                            <td>{{$product->created_at}}</td>
-                                            <td>{{$product->updated_at}}</td>
+                                            <td>{{$product->created_at->diffForHumans()}}</td>
+                                            <td>{{$product->updated_at->diffForHumans()}}</td>
                                             <td>
                                                 <a href="{{route('admin.product.edit',$product->id)}}" class="btn btn-primary"><i class="las la-edit"></i></a>
                                                 <button class="btn btn-danger" onclick="deleteProduct({{$product->id}})">
