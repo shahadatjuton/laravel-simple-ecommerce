@@ -19,19 +19,7 @@ class PaymentController extends Controller
         $this->gateway->setTestMode(true);
     }
 
-    /**
-     * Call a view.
-     */
-    public function index()
-    {
-        return view('payment');
-    }
 
-    /**
-     * Initiate a payment on PayPal.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     */
     public function charge(Request $request)
     {
         if($request->input('submit'))
@@ -55,11 +43,7 @@ class PaymentController extends Controller
         }
     }
 
-    /**
-     * Charge a payment and store the transaction.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     */
+
     public function success(Request $request)
     {
         if ($request->input('paymentId') && $request->input('PayerID'))
@@ -93,9 +77,7 @@ class PaymentController extends Controller
         }
     }
 
-    /**
-     * Error Handling.
-     */
+    
     public function error()
     {
         Toastr::error('The Payment is cancelled','Error!!');
