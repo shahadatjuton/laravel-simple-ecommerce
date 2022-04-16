@@ -11,7 +11,7 @@
                 <div class="px-15px px-lg-25px">
 
                     <div class="row">
-                        <div class="col-lg-10 offset-1">
+                        <div class="col-lg-12">
 
                             <div class="card">
                                 <div class="card-header">
@@ -30,6 +30,8 @@
                                         <tr>
                                             <th scope="col">SL</th>
                                             <th scope="col">Image</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Sub-Category</th>
                                             <th scope="col">Product</th>
                                             <th scope="col">Quantity</th>
                                             <th scope="col">Price</th>
@@ -45,6 +47,8 @@
                                             <td>
                                                 <img src="{{asset('storage/product/'.$product->product_image)}}" height="80" width="60">
                                             </td>
+                                            <td>{{$product->subcategory->category->category}}</td>
+                                            <td>{{$product->subcategory->subcategory}}</td>
                                             <td>{{$product->product_name}}</td>
                                             <td>{{$product->quantity}}</td>
                                             <td>{{$product->price}}</td>

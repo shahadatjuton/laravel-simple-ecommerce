@@ -77,7 +77,7 @@ class PaymentController extends Controller
         }
     }
 
-    
+
     public function error()
     {
         Toastr::error('The Payment is cancelled','Error!!');
